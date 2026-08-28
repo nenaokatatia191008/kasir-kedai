@@ -21,9 +21,9 @@ export default function LoginStaff() {
     setLoading(false);
 
     if (error) {
-      alert('⚠️ Email atau password salah!');
-      console.log(error);
-      return; // ← HARUS ADA RETURN!
+      alert('❌ Email atau password salah!');
+      console.log('Error:', error);
+      return;
     }
 
     // Simpan data staff ke localStorage
@@ -47,7 +47,8 @@ export default function LoginStaff() {
         padding: '40px',
         borderRadius: '12px',
         width: '100%',
-        maxWidth: '400px'
+        maxWidth: '400px',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.5)'
       }}>
         <h2 style={{ color: '#F5E6D3', textAlign: 'center', marginBottom: '30px' }}>
           🔐 Login Kasir
@@ -110,7 +111,8 @@ export default function LoginStaff() {
               borderRadius: '8px',
               fontSize: '16px',
               fontWeight: 'bold',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              opacity: loading ? 0.6 : 1
             }}
           >
             {loading ? 'Loading...' : 'Login'}
