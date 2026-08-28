@@ -10,6 +10,7 @@ export default function LoginStaff() {
     e.preventDefault();
     setLoading(true);
 
+    // Cari data staff di Supabase (tabel staff)
     const { data, error } = await supabase
       .from('staff')
       .select('*')
@@ -20,11 +21,15 @@ export default function LoginStaff() {
     setLoading(false);
 
     if (error) {
-      alert('❌ Email atau password salah!');
-      return;
+      alert('⚠️ Email atau password salah!');
+      console.log(error);
+      return; // ← HARUS ADA RETURN!
     }
 
+    // Simpan data staff ke localStorage
     localStorage.setItem('staff', JSON.stringify(data));
+
+    // Arahkan ke dashboard
     window.location.href = '/dashboard';
   };
 
@@ -47,6 +52,7 @@ export default function LoginStaff() {
         <h2 style={{ color: '#F5E6D3', textAlign: 'center', marginBottom: '30px' }}>
           🔐 Login Kasir
         </h2>
+
         <form onSubmit={handleLogin}>
           <div style={{ marginBottom: '20px' }}>
             <label style={{ color: '#C4A88A', display: 'block', marginBottom: '8px' }}>
@@ -69,6 +75,7 @@ export default function LoginStaff() {
               }}
             />
           </div>
+
           <div style={{ marginBottom: '24px' }}>
             <label style={{ color: '#C4A88A', display: 'block', marginBottom: '8px' }}>
               Password
@@ -90,6 +97,7 @@ export default function LoginStaff() {
               }}
             />
           </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -108,6 +116,7 @@ export default function LoginStaff() {
             {loading ? 'Loading...' : 'Login'}
           </button>
         </form>
+
         <p style={{ color: '#8A6E56', textAlign: 'center', marginTop: '20px', fontSize: '14px' }}>
           👤 admin@kedai.com / admin123
         </p>
